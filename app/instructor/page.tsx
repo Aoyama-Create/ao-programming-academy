@@ -4,6 +4,8 @@ import { isInstructorVerified } from "@/lib/instructor-auth";
 import { InstructorLoginForm } from "./InstructorLoginForm";
 
 const ANSWER_LINKS = [
+  { id: "stage1-week1-answer", label: "Stage 1 第 1 週：演習課題 解答例" },
+  { id: "stage1-week2-answer", label: "Stage 1 第 2 週：演習課題 解答例" },
   { id: "stage1-week3-answer", label: "Stage 1 第 3 週：簡易計算機（CLI）解答例" },
 ] as const;
 
