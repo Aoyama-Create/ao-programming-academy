@@ -30,3 +30,26 @@ export function getContent(key: ContentKey): string {
 export function getContentKeys(): ContentKey[] {
   return Object.keys(contentFiles) as ContentKey[];
 }
+
+const INSTRUCTOR_DIR = path.join(CONTENT_DIR, "instructor");
+
+/**
+ * 講師用コンテンツ（解答など）を取得する。id は英数字とハイフンのみ許可。
+ * ファイルが存在しない場合は null。
+ */
+export function getInstructorContent(id: string): string | null {
+  if (!/^[a-zA-Z0-9-]+$/.test(id)) {
+    return null;
+  }
+  const filePath = path.join(INSTRUCTOR_DIR, `${id}.md`);
+  const resolved = path.resolve(filePath);
+  const instructorResolved = path.resolve(INSTRUCTOR_DIR);
+  if (!resolved.startsWith(instructorResolved) || path.relative(instructorResolved, resolved).startsWith("..")) {
+    return null;
+  }
+  try {
+    return fs.readFileSync(filePath, "utf-8");
+  } catch {
+    return null;
+  }
+}

@@ -3,6 +3,7 @@
 import { AppShell, NavLink, Group, Title } from "@mantine/core";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { PageTransitionLoader } from "./PageTransitionLoader";
 
 const navItems = [
   { href: "/", label: "トップ" },
@@ -39,7 +40,9 @@ export function AppShellNav({ children }: { children: React.ReactNode }) {
           />
         ))}
       </AppShell.Navbar>
-      <AppShell.Main>{children}</AppShell.Main>
+      <AppShell.Main>
+          <PageTransitionLoader>{children}</PageTransitionLoader>
+        </AppShell.Main>
     </AppShell>
   );
 }

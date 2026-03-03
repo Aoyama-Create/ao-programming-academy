@@ -1,12 +1,20 @@
 "use client";
 
 import React, { Children, isValidElement } from "react";
+import dynamic from "next/dynamic";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import oneDark from "react-syntax-highlighter/dist/esm/styles/prism/one-dark";
-import { MermaidDiagram } from "./MermaidDiagram";
+
+const LazySyntaxHighlighter = dynamic(
+  () => import("./LazySyntaxHighlighter").then((m) => ({ default: m.LazySyntaxHighlighter })),
+  { ssr: false, loading: () => <pre className="rounded bg-gray-100 dark:bg-gray-800 p-4 overflow-x-auto text-sm"><code>読み込み中...</code></pre> }
+);
+
+const MermaidDiagram = dynamic(
+  () => import("./MermaidDiagram").then((m) => ({ default: m.MermaidDiagram })),
+  { ssr: false, loading: () => <div className="h-24 rounded bg-gray-100 dark:bg-gray-800 animate-pulse" /> }
+);
 
 type MarkdownRendererProps = {
   content: string;
@@ -40,16 +48,9 @@ export function MarkdownRenderer({ content }: MarkdownRendererProps) {
           }
           if (match) {
             return (
-              <SyntaxHighlighter
-                language={match[1]}
-                style={oneDark}
-                PreTag="div"
-                className="code-block-wrapper"
-                showLineNumbers={false}
-                customStyle={{ margin: 0 }}
-              >
+              <LazySyntaxHighlighter language={match[1]}>
                 {code}
-              </SyntaxHighlighter>
+              </LazySyntaxHighlighter>
             );
           }
           return (
