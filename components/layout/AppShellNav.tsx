@@ -9,6 +9,7 @@ const navItems = [
   { href: "/", label: "トップ" },
   { href: "/preparation", label: "受講開始前の準備" },
   { href: "/stage1", label: "Stage 1 教材" },
+  { href: "/stage2", label: "Stage 2 教材" },
   { href: "/weekly", label: "週単位カリキュラム" },
   { href: "/prerequisite", label: "前提知識の接続" },
   { href: "/capstone", label: "Capstone 仕様書" },

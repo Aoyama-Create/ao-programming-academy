@@ -13,6 +13,7 @@
 - [受講開始前の準備](/preparation)（はじめて読む前に）… PC・用語・環境構築
 - [週単位カリキュラム](/weekly) … どこで何時間やるか
 - [Stage 1 教材](/stage1) … プログラミング入門（第 1〜3 週の詳細）
+- [Stage 2 教材](/stage2) … AI 統合開発基盤（第 4〜6 週の詳細）
 - [前提知識の接続](/prerequisite) … 各 Stage の入り口・出口と依存関係
 - [Capstone 完全仕様書](/capstone) … 卒業制作の要件
 - [ルーブリック](/rubric) … 評価基準（Stage 毎・Capstone）
