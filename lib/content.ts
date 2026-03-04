@@ -28,6 +28,7 @@ const contentFiles: Record<string, string> = {
   "stage4-week14": "stage4/week14.md",
   "stage4-week15": "stage4/week15.md",
   "stage4-week16": "stage4/week16.md",
+  "stage4-week17": "stage4/week17.md",
   stage5: "stage5/README.md",
   "stage5-week17": "stage5/week17.md",
   "stage5-week18": "stage5/week18.md",

@@ -61,10 +61,10 @@ flowchart TB
 | 第 4〜6 週 | Stage 2 | [Stage 2：AI 統合開発基盤](/weekly#stage-2ai-統合開発基盤) |
 | 第 7〜8 週 | Web フロント基礎 | [Web フロント基礎](/weekly#web-フロント基礎htmlcssjs) |
 | 第 9〜12 週 | Stage 3 | [Stage 3：フロント実務](/weekly#stage-3フロント実務react--ts) |
-| 第 13〜16 週 | Stage 4 | [Stage 4：バックエンド](/weekly#stage-4バックエンドlaravel) |
-| 第 17〜19 週 | Stage 5 | [Stage 5：データ設計](/weekly#stage-5データ設計) |
-| 第 20〜22 週 | Stage 6 | [Stage 6：品質保証](/weekly#stage-6品質保証) |
-| 第 23 週 | Docker | [Docker 基礎](/weekly#docker-基礎) |
-| 第 24〜27 週 | Stage 7 | [Stage 7：AWS & IaC](/weekly#stage-7aws--iac) |
-| 第 28〜30 週 | Stage 8 | [Stage 8：セキュリティ & 運用](/weekly#stage-8セキュリティ--運用) |
-| 第 31〜36 週 目安 | Capstone | [Final：Capstone](/weekly#final-capstone) |
+| 第 13〜17 週 | Stage 4 | [Stage 4：バックエンド](/weekly#stage-4バックエンドlaravel) |
+| 第 18〜20 週 | Stage 5 | [Stage 5：データ設計](/weekly#stage-5データ設計) |
+| 第 21〜23 週 | Stage 6 | [Stage 6：品質保証](/weekly#stage-6品質保証) |
+| 第 24 週 | Docker | [Docker 基礎](/weekly#docker-基礎) |
+| 第 25〜28 週 | Stage 7 | [Stage 7：AWS & IaC](/weekly#stage-7aws--iac) |
+| 第 29〜31 週 | Stage 8 | [Stage 8：セキュリティ & 運用](/weekly#stage-8セキュリティ--運用) |
+| 第 32〜37 週 目安 | Capstone | [Final：Capstone](/weekly#final-capstone) |

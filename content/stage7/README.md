@@ -1,10 +1,10 @@
 # Stage 7：AWS & IaC
 
-**目安：第 24〜27 週（各週 約 10 時間）**
+**目安：第 25〜28 週（各週 約 10 時間）**
 
 Stage 7 では、**AWS** と **Infrastructure as Code（IaC）** で、再現可能なクラウド環境を構築する力を身につけます。VPC・IAM・S3・RDS、Terraform、ECS（Fargate）、dev/stg/prod の環境分離を通じて、10 分で環境再現を目指すことが目標です。
 
-- **入り口**: [Docker 基礎](/weekly#docker-基礎)（第 23 週）を修了していること。コンテナ・イメージ・Dockerfile を理解し、ローカルでコンテナ実行できるレベルを想定しています。まだの場合は、先に第 23 週の教材を完了させてから始めてください。
+- **入り口**: [Docker 基礎](/weekly#docker-基礎)（第 24 週）を修了していること。コンテナ・イメージ・Dockerfile を理解し、ローカルでコンテナ実行できるレベルを想定しています。まだの場合は、先に第 24 週の教材を完了させてから始めてください。
 
 ---
 
@@ -12,10 +12,10 @@ Stage 7 では、**AWS** と **Infrastructure as Code（IaC）** で、再現可
 
 | 週 | 内容 | リンク |
 |----|------|--------|
-| 第 24 週 | VPC 設計、IAM 最小権限、S3・RDS の基礎 | [第 24 週の教材](/stage7/week24) |
-| 第 25 週 | Terraform 基礎、module 化、state 管理 | [第 25 週の教材](/stage7/week25) |
-| 第 26 週 | ECS（Fargate）、dev/stg/prod 環境分離 | [第 26 週の教材](/stage7/week26) |
-| 第 27 週 | CI で terraform plan、本番模擬デプロイ（提出物） | [第 27 週の教材](/stage7/week27) |
+| 第 25 週 | VPC 設計、IAM 最小権限、S3・RDS の基礎 | [第 25 週の教材](/stage7/week24) |
+| 第 26 週 | Terraform 基礎、module 化、state 管理 | [第 26 週の教材](/stage7/week25) |
+| 第 27 週 | ECS（Fargate）、dev/stg/prod 環境分離 | [第 27 週の教材](/stage7/week26) |
+| 第 28 週 | CI で terraform plan、本番模擬デプロイ（提出物） | [第 28 週の教材](/stage7/week27) |
 
 ---
 
@@ -42,10 +42,10 @@ Stage 7 を修了したかどうかは、次のチェックリストで確認で
 
 ## 提出物の目安
 
-- **第 27 週**: CI で terraform plan の実行、本番模擬デプロイの手順またはレポート
+- **第 28 週**: CI で terraform plan の実行、本番模擬デプロイの手順またはレポート
 
 ---
 
 ## Stage 8 への接続
 
-Stage 7 を修了したら、次は **Stage 8：セキュリティ & 運用**（第 28〜30 週）に進みます。OWASP、RBAC、脅威モデリング、構造化ログ、アラート、ポストモーテムを学びます。週単位の流れは [週単位カリキュラム](/weekly) を参照してください。
+Stage 7 を修了したら、次は **Stage 8：セキュリティ & 運用**（第 29〜31 週）に進みます。OWASP、RBAC、脅威モデリング、構造化ログ、アラート、ポストモーテムを学びます。週単位の流れは [週単位カリキュラム](/weekly) を参照してください。
