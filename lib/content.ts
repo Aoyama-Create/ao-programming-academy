@@ -23,6 +23,11 @@ const contentFiles: Record<string, string> = {
   "stage3-week10": "stage3/week10.md",
   "stage3-week11": "stage3/week11.md",
   "stage3-week12": "stage3/week12.md",
+  stage4: "stage4/README.md",
+  "stage4-week13": "stage4/week13.md",
+  "stage4-week14": "stage4/week14.md",
+  "stage4-week15": "stage4/week15.md",
+  "stage4-week16": "stage4/week16.md",
 };
 
 export type ContentKey = keyof typeof contentFiles;

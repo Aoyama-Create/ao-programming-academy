@@ -15,6 +15,7 @@
 - [Stage 1 教材](/stage1) … プログラミング入門（第 1〜3 週の詳細）
 - [Stage 2 教材](/stage2) … AI 統合開発基盤（第 4〜6 週の詳細）
 - [Stage 3 教材](/stage3) … フロント実務（React + TS）（第 9〜12 週の詳細）
+- [Stage 4 教材](/stage4) … バックエンド（Laravel）（第 13〜16 週の詳細）
 - [前提知識の接続](/prerequisite) … 各 Stage の入り口・出口と依存関係
 - [Capstone 完全仕様書](/capstone) … 卒業制作の要件
 - [ルーブリック](/rubric) … 評価基準（Stage 毎・Capstone）

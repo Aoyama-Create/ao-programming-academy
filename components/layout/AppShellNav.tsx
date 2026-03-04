@@ -11,6 +11,7 @@ const navItems = [
   { href: "/stage1", label: "Stage 1 教材" },
   { href: "/stage2", label: "Stage 2 教材" },
   { href: "/stage3", label: "Stage 3 教材" },
+  { href: "/stage4", label: "Stage 4 教材" },
   { href: "/weekly", label: "週単位カリキュラム" },
   { href: "/prerequisite", label: "前提知識の接続" },
   { href: "/capstone", label: "Capstone 仕様書" },
