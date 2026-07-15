@@ -8,6 +8,10 @@ type MermaidDiagramProps = {
 
 let mermaidInitialized = false;
 
+// 同じ図の再描画を避ける。StrictMode の二重発火や、
+// 戻る/進むでの再マウント時にそのまま使い回す。
+const svgCache = new Map<string, string>();
+
 function ensureMermaidInitialized(mermaid: { initialize: (config: Record<string, unknown>) => void }) {
   if (mermaidInitialized) return;
   mermaid.initialize({
@@ -31,11 +35,12 @@ function ensureMermaidInitialized(mermaid: { initialize: (config: Record<string,
 
 export function MermaidDiagram({ chart }: MermaidDiagramProps) {
   const id = useId().replace(/:/g, "");
-  const [svg, setSvg] = useState<string | null>(null);
+  const [svg, setSvg] = useState<string | null>(() => svgCache.get(chart) ?? null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!chart.trim()) return;
+    if (svgCache.has(chart)) return;
 
     let cancelled = false;
 
@@ -47,7 +52,9 @@ export function MermaidDiagram({ chart }: MermaidDiagramProps) {
         return mermaid.render(uniqueId, chart);
       })
       .then((result) => {
-        if (!cancelled && result.svg) {
+        if (!result.svg) return;
+        svgCache.set(chart, result.svg);
+        if (!cancelled) {
           setSvg(result.svg);
           setError(null);
         }
@@ -66,9 +73,9 @@ export function MermaidDiagram({ chart }: MermaidDiagramProps) {
 
   if (error) {
     return (
-      <div className="my-4 rounded border border-red-200 bg-red-50 p-3 text-sm text-red-800">
+      <div className="mermaid-error">
         <strong>図の描画エラー:</strong> {error}
-        <pre className="mt-2 overflow-x-auto whitespace-pre-wrap text-xs">{chart}</pre>
+        <pre>{chart}</pre>
       </div>
     );
   }
@@ -76,16 +83,11 @@ export function MermaidDiagram({ chart }: MermaidDiagramProps) {
   if (svg) {
     return (
       <div
-        className="mermaid-wrapper my-6 w-full overflow-auto rounded-lg border border-gray-200 bg-white p-6 [&_svg]:min-w-[320px] [&_svg]:overflow-visible [&_svg_.node]:overflow-visible [&_svg_.nodeLabel]:overflow-visible"
+        className="mermaid-wrapper"
         dangerouslySetInnerHTML={{ __html: svg }}
       />
     );
   }
 
-  return (
-    <div
-      style={{ margin: "1.5rem 0", minHeight: 80, borderRadius: 8, background: "#f3f4f6" }}
-      aria-busy="true"
-    />
-  );
+  return <div className="mermaid-placeholder" aria-busy="true" />;
 }

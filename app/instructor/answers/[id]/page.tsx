@@ -21,9 +21,9 @@ export default async function InstructorAnswerPage({ params }: PageProps) {
   }
 
   return (
-    <main className="prose prose-slate max-w-none px-4 py-6">
+    <main className="page-main">
       <p className="text-sm text-gray-600 mb-4">
-        <Link href="/instructor" className="text-blue-600 underline hover:text-blue-800">
+        <Link href="/instructor" className="page-link">
           ← 解答一覧に戻る
         </Link>
       </p>

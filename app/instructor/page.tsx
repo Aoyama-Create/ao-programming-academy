@@ -24,7 +24,7 @@ export default async function InstructorPage() {
         <ul className="list-disc list-inside space-y-2">
           {ANSWER_LINKS.map(({ id, label }) => (
             <li key={id}>
-              <Link href={`/instructor/answers/${id}`} className="text-blue-600 underline hover:text-blue-800">
+              <Link href={`/instructor/answers/${id}`} className="page-link">
                 {label}
               </Link>
             </li>

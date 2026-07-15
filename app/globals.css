@@ -1,0 +1,240 @@
+/*
+ * Mantine の styles.css は body の背景を var(--mantine-color-body) で塗るが、
+ * この変数は :root[data-mantine-color-scheme] が付くまで解決しない。
+ * hydrate 前の 1 フレームを白で塗りつぶすためのフォールバックがここ。
+ */
+:root {
+  color-scheme: light;
+}
+
+html,
+body {
+  background-color: #ffffff;
+  color: #1a1a1b;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- page shell ---------- */
+
+.page-main {
+  max-width: 860px;
+  padding: 0.5rem 0.25rem 4rem;
+}
+
+.page-link {
+  color: #0969da;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.page-link:hover {
+  color: #0550ae;
+}
+
+/* ---------- markdown body ---------- */
+
+.markdown-body {
+  font-size: 1rem;
+  line-height: 1.85;
+  color: #24292f;
+  overflow-wrap: break-word;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  margin: 2rem 0 1rem;
+  line-height: 1.35;
+  font-weight: 700;
+  scroll-margin-top: 72px; /* sticky header の下に見出しが隠れないように */
+}
+
+.markdown-body h1 {
+  font-size: 1.9rem;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid #d8dee4;
+}
+
+.markdown-body h2 {
+  font-size: 1.5rem;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid #d8dee4;
+}
+
+.markdown-body h3 {
+  font-size: 1.2rem;
+}
+
+.markdown-body h4 {
+  font-size: 1.05rem;
+}
+
+.markdown-body h1:first-child,
+.markdown-body h2:first-child {
+  margin-top: 0.5rem;
+}
+
+.markdown-body p {
+  margin: 0 0 1rem;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  margin: 0 0 1rem;
+  padding-left: 1.6rem;
+}
+
+.markdown-body li {
+  margin: 0.3rem 0;
+}
+
+.markdown-body li > ul,
+.markdown-body li > ol {
+  margin: 0.3rem 0;
+}
+
+.markdown-body blockquote {
+  margin: 1.25rem 0;
+  padding: 0.5rem 1rem;
+  border-left: 4px solid #d0d7de;
+  background: #f6f8fa;
+  color: #57606a;
+}
+
+.markdown-body blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-body hr {
+  height: 1px;
+  margin: 2rem 0;
+  border: 0;
+  background: #d8dee4;
+}
+
+.markdown-body a {
+  color: #0969da;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.markdown-body a:hover {
+  color: #0550ae;
+}
+
+.markdown-body strong {
+  font-weight: 700;
+}
+
+/* ---------- inline code ---------- */
+
+.markdown-body :not(pre) > code {
+  padding: 0.15em 0.4em;
+  border-radius: 6px;
+  background: #eff1f3;
+  font-size: 0.875em;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+
+/* ---------- code block (CodeBlock.tsx) ---------- */
+
+.code-block {
+  margin: 1.25rem 0;
+  border-radius: 8px;
+  border: 1px solid #30363d;
+  overflow: hidden;
+  font-size: 0.85rem;
+}
+
+.code-block pre,
+.code-block code {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+
+/* ---------- tables ---------- */
+
+.markdown-body .table-scroll {
+  margin: 1.5rem 0;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.markdown-body table {
+  width: 100%;
+  min-width: 480px;
+  border-collapse: collapse;
+  border: 1px solid #d1d5db;
+  font-size: 0.875rem;
+}
+
+.markdown-body thead {
+  background-color: #f3f4f6;
+}
+
+.markdown-body th,
+.markdown-body td {
+  border: 1px solid #d1d5db;
+  padding: 0.5rem 0.75rem;
+}
+
+.markdown-body th {
+  text-align: left;
+  font-weight: 600;
+}
+
+.markdown-body td {
+  vertical-align: top;
+}
+
+/* ---------- mermaid ---------- */
+
+.mermaid-wrapper {
+  margin: 1.5rem 0;
+  width: 100%;
+  overflow: auto;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  padding: 1.5rem;
+}
+
+.mermaid-wrapper svg {
+  min-width: 320px;
+  overflow: visible;
+}
+
+.mermaid-wrapper svg .node,
+.mermaid-wrapper svg .nodeLabel {
+  overflow: visible;
+}
+
+.mermaid-placeholder {
+  margin: 1.5rem 0;
+  min-height: 80px;
+  border-radius: 8px;
+  background: #f3f4f6;
+}
+
+.mermaid-error {
+  margin: 1rem 0;
+  border-radius: 6px;
+  border: 1px solid #fecaca;
+  background: #fef2f2;
+  padding: 0.75rem;
+  font-size: 0.875rem;
+  color: #991b1b;
+}
+
+.mermaid-error pre {
+  margin-top: 0.5rem;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  font-size: 0.75rem;
+}

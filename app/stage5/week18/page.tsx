@@ -4,7 +4,7 @@ import { MarkdownRenderer } from "@/components/markdown/MarkdownRenderer";
 export default function Stage5Week18Page() {
   const content = getContent("stage5-week18");
   return (
-    <main className="prose prose-slate max-w-none px-4 py-6">
+    <main className="page-main">
       <MarkdownRenderer content={content} />
     </main>
   );
