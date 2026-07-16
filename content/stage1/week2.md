@@ -190,11 +190,35 @@ console.log(filterEven([1, 2, 3, 4, 5, 6])); // [2, 4, 6]
 
 第 1 週で「1 から n までの合計」を書いたと思います。それを **関数 `sumTo(n)`** にしましょう。引数に `n` を受け取り、1 から n までの合計を **return** で返す関数を書き、`console.log(sumTo(5))` で 15 が表示されることを確認してください。
 
+下のエディタで試してみましょう（確認用の `console.log` は用意してあります。関数の中身を書いてください）。
+
+```exercise
+{
+  "id": "stage1-week2-sumto",
+  "kind": "node-js",
+  "title": "課題1: 関数 sumTo(n)",
+  "prompt": "1 から n までの合計を return する関数 sumTo(n) を書く。console.log(sumTo(5)) で 15 になれば正解。",
+  "starter": "function sumTo(n) {\n  // 1 から n までの合計を return する\n}\n\nconsole.log(sumTo(5));\n",
+  "expected": "15"
+}
+```
+
 ---
 
 ### 課題 2：配列の合計
 
 数値が入った配列を受け取り、**合計**を返す関数 `sumArray(arr)` を書きなさい。例：`sumArray([1, 2, 3, 4])` は `10` を返す。
+
+```exercise
+{
+  "id": "stage1-week2-sumarray",
+  "kind": "node-js",
+  "title": "課題2: 配列の合計 sumArray(arr)",
+  "prompt": "配列の合計を return する関数 sumArray(arr) を書く。console.log(sumArray([1,2,3,4])) で 10 になれば正解。",
+  "starter": "function sumArray(arr) {\n  // 配列の合計を return する\n}\n\nconsole.log(sumArray([1, 2, 3, 4]));\n",
+  "expected": "10"
+}
+```
 
 ---
 
@@ -202,17 +226,52 @@ console.log(filterEven([1, 2, 3, 4, 5, 6])); // [2, 4, 6]
 
 数値が入った配列を受け取り、**最大値**を返す関数 `maxArray(arr)` を書きなさい。例：`maxArray([3, 7, 2, 9])` は `9` を返す。配列の要素が 1 つ以上あると仮定してよい。
 
+```exercise
+{
+  "id": "stage1-week2-maxarray",
+  "kind": "node-js",
+  "title": "課題3: 配列の最大値 maxArray(arr)",
+  "prompt": "配列の最大値を return する関数 maxArray(arr) を書く。console.log(maxArray([3,7,2,9])) で 9 になれば正解。",
+  "starter": "function maxArray(arr) {\n  // 配列の最大値を return する\n}\n\nconsole.log(maxArray([3, 7, 2, 9]));\n",
+  "expected": "9"
+}
+```
+
 ---
 
 ### 課題 4：条件に合う要素の個数
 
 数値の配列と「しきい値」を受け取り、**しきい値より大きい要素の個数**を返す関数 `countGreaterThan(arr, threshold)` を書きなさい。例：`countGreaterThan([1, 5, 3, 8, 2], 4)` は `2`（5 と 8 の 2 個）を返す。
 
+```exercise
+{
+  "id": "stage1-week2-count",
+  "kind": "node-js",
+  "title": "課題4: 条件に合う要素の個数 countGreaterThan(arr, threshold)",
+  "prompt": "threshold より大きい要素の個数を return する関数を書く。console.log(countGreaterThan([1,5,3,8,2], 4)) で 2 になれば正解。",
+  "starter": "function countGreaterThan(arr, threshold) {\n  // threshold より大きい要素の個数を return する\n}\n\nconsole.log(countGreaterThan([1, 5, 3, 8, 2], 4));\n",
+  "expected": "2"
+}
+```
+
 ---
 
 ### 課題 5：条件を満たす要素を集める
 
 数値の配列を受け取り、**10 以上の要素だけ**を入れた新しい配列を返す関数 `filterTenAndOver(arr)` を書きなさい。例：`filterTenAndOver([3, 12, 7, 15, 9])` は `[12, 15]` を返す。
+
+下の確認用コードは、返ってきた配列を `join(",")` でつないで表示します（`12,15` と出れば正解です）。
+
+```exercise
+{
+  "id": "stage1-week2-filter",
+  "kind": "node-js",
+  "title": "課題5: 条件を満たす要素を集める filterTenAndOver(arr)",
+  "prompt": "10 以上の要素だけの新しい配列を return する関数を書く。確認用に join(\",\") で表示し、12,15 になれば正解。",
+  "starter": "function filterTenAndOver(arr) {\n  // 10 以上の要素だけの新しい配列を return する\n}\n\n// 確認用：返ってきた配列をカンマ区切りで表示します\nconsole.log(filterTenAndOver([3, 12, 7, 15, 9]).join(\",\"));\n",
+  "expected": "12,15"
+}
+```
 
 ---
 

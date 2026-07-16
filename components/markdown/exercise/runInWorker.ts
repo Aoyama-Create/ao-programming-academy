@@ -19,7 +19,8 @@ export type RunResult = {
 // Worker の中身。文字列として Blob 化して起動する。
 const WORKER_SOURCE = `
 self.onmessage = function (e) {
-  var code = e.data;
+  var code = e.data.code;
+  var args = e.data.args || [];
   var lines = [];
 
   function format(args) {
@@ -43,10 +44,13 @@ self.onmessage = function (e) {
     debug: function () { lines.push(format([].slice.call(arguments))); },
   };
 
+  // 最小限の process。argv は Node に合わせて ["node","main.js", ...args]。
+  var proc = { argv: ["node", "main.js"].concat(args) };
+
   try {
-    // console だけを差し替えた関数スコープで実行する。
-    var fn = new Function("console", code);
-    fn(patched);
+    // console と process だけを差し替えた関数スコープで実行する。
+    var fn = new Function("console", "process", code);
+    fn(patched, proc);
     self.postMessage({ ok: true, stdout: lines });
   } catch (err) {
     self.postMessage({
@@ -60,7 +64,8 @@ self.onmessage = function (e) {
 
 export function runUserCode(
   code: string,
-  timeoutMs: number
+  timeoutMs: number,
+  args: string[] = []
 ): Promise<RunResult> {
   return new Promise((resolve) => {
     let worker: Worker | null = null;
@@ -117,7 +122,7 @@ export function runUserCode(
         });
       };
 
-      worker.postMessage(code);
+      worker.postMessage({ code, args });
     } catch (e) {
       if (done) return;
       done = true;

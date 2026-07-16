@@ -54,6 +54,27 @@ node calc.js divide 10 3
 - 引数は文字列として渡されるので、数値に変換するには `Number(process.argv[3])` のようにします。
 - 引数が足りない場合（例：演算子しか渡していない）は、エラーメッセージを表示して終了するようにすると親切です。
 
+### ブラウザで試す
+
+下のエディタでは、`process.argv` に渡す引数をこちらで用意した **4 パターン**（add / subtract / multiply / divide の各 `10` と `3`）で自動的に実行し、すべて期待どおりならクリアです。割り算は小数もそのまま表示されます（`10 / 3` は `3.3333333333333335`）。実際のターミナルでも `node calc.js add 10 3` のように動きます。
+
+```exercise
+{
+  "id": "stage1-week3-calc",
+  "kind": "node-js",
+  "title": "課題: 簡易計算機（CLI）",
+  "prompt": "process.argv で演算子と 2 つの数を受け取り、計算結果を表示。add / subtract / multiply / divide の 4 ケースで確認します。",
+  "command": "node calc.js",
+  "starter": "const op = process.argv[2];\nconst a = Number(process.argv[3]);\nconst b = Number(process.argv[4]);\n\n// op が \"add\" / \"subtract\" / \"multiply\" / \"divide\" のとき、\n// a と b の計算結果を console.log で表示する。\n// 例: op が \"add\" なら a + b を表示。\n",
+  "cases": [
+    { "args": ["add", "10", "3"], "expected": "13" },
+    { "args": ["subtract", "10", "3"], "expected": "7" },
+    { "args": ["multiply", "10", "3"], "expected": "30" },
+    { "args": ["divide", "10", "3"], "expected": "3.3333333333333335" }
+  ]
+}
+```
+
 ---
 
 ## ステップ案（進め方）

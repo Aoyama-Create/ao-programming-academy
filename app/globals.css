@@ -316,6 +316,12 @@ body {
   min-height: 3rem;
 }
 
+.exercise-terminal-case + .exercise-terminal-case {
+  margin-top: 0.75rem;
+  padding-top: 0.55rem;
+  border-top: 1px solid #21262d;
+}
+
 .exercise-terminal-prompt {
   color: #7ee787;
   margin-bottom: 0.35rem;

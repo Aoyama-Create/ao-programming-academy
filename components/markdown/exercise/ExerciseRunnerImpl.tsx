@@ -5,16 +5,41 @@ import { Button, Group } from "@mantine/core";
 import {
   parseExerciseSpec,
   grade,
+  toRunCases,
   type ExerciseSpec,
   type GradeResult,
 } from "./types";
 import { runUserCode } from "./runInWorker";
 import { formatCode } from "./formatCode";
 
+// 1 ケースの実行結果。argv を使わない課題は args=[] の 1 ケースとして扱う。
+type CaseOutcome = {
+  args: string[];
+  stdout: string[];
+  error?: string;
+  timedOut: boolean;
+  grade: GradeResult;
+};
+
 type Status =
   | { phase: "idle" }
   | { phase: "running" }
-  | { phase: "done"; stdout: string[]; error?: string; timedOut: boolean; grade: GradeResult };
+  | { phase: "done"; outcomes: CaseOutcome[]; allPass: boolean };
+
+// 最初に失敗したケースから、結果バナー用のメッセージを組み立てる。
+function failMessage(outcomes: CaseOutcome[], multi: boolean): string {
+  const fail = outcomes.find((o) => o.timedOut || o.error || !o.grade.pass);
+  if (!fail) return "";
+  const label = multi ? `「${fail.args.join(" ")}」で: ` : "";
+  if (fail.timedOut) {
+    return `✗ ${label}時間切れ（無限ループの可能性があります）`;
+  }
+  if (fail.error) {
+    return `✗ ${label}エラーが出ました。ターミナルの内容を確認してください。`;
+  }
+  const hint = fail.grade.pass ? "" : fail.grade.hint;
+  return `✗ もう少し。${label}${hint}`;
+}
 
 export function ExerciseRunnerImpl({ spec: raw }: { spec: string }) {
   const parsed = parseExerciseSpec(raw);
@@ -47,21 +72,36 @@ function Runner({ spec }: { spec: ExerciseSpec }) {
     });
   };
 
-  const command = spec.command ?? "node main.js";
+  const baseCommand = spec.command ?? "node main.js";
   const timeoutMs = spec.timeoutMs ?? 2000;
+  const multi = !!(spec.cases && spec.cases.length > 0);
+
+  // 1 ケースの実行コマンド表示（例: "node calc.js add 10 3"）。
+  const caseCommand = (args: string[]) =>
+    args.length > 0 ? `${baseCommand} ${args.join(" ")}` : baseCommand;
 
   const handleRun = async () => {
     setStatus({ phase: "running" });
-    const result = await runUserCode(code, timeoutMs);
-    setStatus({
-      phase: "done",
-      stdout: result.stdout,
-      error: result.error,
-      timedOut: result.timedOut,
-      grade: result.timedOut
-        ? { pass: false, hint: "" }
-        : grade(spec.expected, result.stdout.join("\n")),
-    });
+    const runCases = toRunCases(spec);
+    const outcomes: CaseOutcome[] = [];
+    for (const rc of runCases) {
+      const result = await runUserCode(code, timeoutMs, rc.args);
+      const g: GradeResult =
+        result.timedOut || result.error
+          ? { pass: false, hint: "" }
+          : grade(rc.expected, result.stdout.join("\n"));
+      outcomes.push({
+        args: rc.args,
+        stdout: result.stdout,
+        error: result.error,
+        timedOut: result.timedOut,
+        grade: g,
+      });
+    }
+    const allPass = outcomes.every(
+      (o) => !o.timedOut && !o.error && o.grade.pass
+    );
+    setStatus({ phase: "done", outcomes, allPass });
   };
 
   const handleReset = () => {
@@ -173,38 +213,46 @@ function Runner({ spec }: { spec: ExerciseSpec }) {
       </Group>
 
       <div className="exercise-terminal" aria-live="polite">
-        <div className="exercise-terminal-prompt">$ {command}</div>
+        {status.phase !== "done" && (
+          <div className="exercise-terminal-prompt">$ {baseCommand}</div>
+        )}
         {status.phase === "running" && (
           <div className="exercise-terminal-dim">実行中...</div>
         )}
-        {status.phase === "done" && (
-          <>
-            {status.stdout.map((line, i) => (
-              <div key={i} className="exercise-terminal-line">
-                {line === "" ? " " : line}
+        {status.phase === "done" &&
+          status.outcomes.map((o, ci) => (
+            <div key={ci} className="exercise-terminal-case">
+              <div className="exercise-terminal-prompt">
+                $ {caseCommand(o.args)}
               </div>
-            ))}
-            {status.error && (
-              <div className="exercise-terminal-error">{status.error}</div>
-            )}
-            {status.timedOut && (
-              <div className="exercise-terminal-error">
-                時間切れ（無限ループの可能性があります）
-              </div>
-            )}
-          </>
-        )}
+              {o.stdout.map((line, i) => (
+                <div key={i} className="exercise-terminal-line">
+                  {line === "" ? " " : line}
+                </div>
+              ))}
+              {o.error && (
+                <div className="exercise-terminal-error">{o.error}</div>
+              )}
+              {o.timedOut && (
+                <div className="exercise-terminal-error">
+                  時間切れ（無限ループの可能性があります）
+                </div>
+              )}
+            </div>
+          ))}
       </div>
 
-      {status.phase === "done" && !status.timedOut && (
+      {status.phase === "done" && (
         <div
           className={
-            status.grade.pass ? "exercise-result pass" : "exercise-result fail"
+            status.allPass ? "exercise-result pass" : "exercise-result fail"
           }
         >
-          {status.grade.pass
-            ? "✓ 正解です！期待どおりの出力になりました。"
-            : `✗ もう少し。${status.grade.hint}`}
+          {status.allPass
+            ? multi
+              ? `✓ 正解です！全 ${status.outcomes.length} ケースが期待どおりでした。`
+              : "✓ 正解です！期待どおりの出力になりました。"
+            : failMessage(status.outcomes, multi)}
         </div>
       )}
     </section>

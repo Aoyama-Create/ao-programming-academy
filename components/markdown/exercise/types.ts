@@ -5,19 +5,38 @@
  */
 export type ExerciseKind = "node-js";
 
+/** process.argv を使う課題向けのテストケース。args は argv[2] 以降に入る。 */
+export type ExerciseCase = {
+  args: string[];
+  expected: string;
+};
+
 export type ExerciseSpec = {
   id: string;
   kind: ExerciseKind;
   title: string;
   prompt?: string;
   starter: string;
-  /** 期待する標準出力（console.log を1行ずつ連結したもの）。 */
-  expected: string;
+  /** 単一実行の期待出力。cases を使う課題では省略する。 */
+  expected?: string;
+  /** process.argv を使う課題のテストケース群。expected の代わりに指定する。 */
+  cases?: ExerciseCase[];
   /** 仮想ターミナルのプロンプトに表示するコマンド。既定は "node main.js"。 */
   command?: string;
   /** 実行タイムアウト（ミリ秒）。既定 2000。 */
   timeoutMs?: number;
 };
+
+/** 実行単位に正規化した1ケース。単一 expected の課題も1ケースとして扱う。 */
+export type RunCase = { args: string[]; expected: string };
+
+/** spec を実行ケースの配列に正規化する。 */
+export function toRunCases(spec: ExerciseSpec): RunCase[] {
+  if (spec.cases && spec.cases.length > 0) {
+    return spec.cases.map((c) => ({ args: c.args, expected: c.expected }));
+  }
+  return [{ args: [], expected: spec.expected ?? "" }];
+}
 
 export type ParseResult =
   | { ok: true; spec: ExerciseSpec }
@@ -43,7 +62,7 @@ export function parseExerciseSpec(raw: string): ParseResult {
   }
 
   const obj = data as Record<string, unknown>;
-  const missing = ["id", "kind", "title", "starter", "expected"].filter(
+  const missing = ["id", "kind", "title", "starter"].filter(
     (key) => typeof obj[key] !== "string"
   );
   if (missing.length > 0) {
@@ -60,6 +79,39 @@ export function parseExerciseSpec(raw: string): ParseResult {
     };
   }
 
+  // expected（単一実行）か cases（argv 複数ケース）のどちらかが必要。
+  let cases: ExerciseCase[] | undefined;
+  if (obj.cases !== undefined) {
+    if (
+      !Array.isArray(obj.cases) ||
+      obj.cases.length === 0 ||
+      !obj.cases.every(
+        (c) =>
+          typeof c === "object" &&
+          c !== null &&
+          Array.isArray((c as ExerciseCase).args) &&
+          (c as ExerciseCase).args.every((a) => typeof a === "string") &&
+          typeof (c as ExerciseCase).expected === "string"
+      )
+    ) {
+      return {
+        ok: false,
+        error: "cases は { args: string[], expected: string } の配列である必要があります。",
+      };
+    }
+    cases = (obj.cases as ExerciseCase[]).map((c) => ({
+      args: c.args,
+      expected: c.expected,
+    }));
+  }
+
+  if (cases === undefined && typeof obj.expected !== "string") {
+    return {
+      ok: false,
+      error: "expected または cases のどちらかが必要です。",
+    };
+  }
+
   return {
     ok: true,
     spec: {
@@ -68,7 +120,8 @@ export function parseExerciseSpec(raw: string): ParseResult {
       title: obj.title as string,
       prompt: typeof obj.prompt === "string" ? obj.prompt : undefined,
       starter: obj.starter as string,
-      expected: obj.expected as string,
+      expected: typeof obj.expected === "string" ? obj.expected : undefined,
+      cases,
       command: typeof obj.command === "string" ? obj.command : undefined,
       timeoutMs:
         typeof obj.timeoutMs === "number" ? obj.timeoutMs : undefined,
