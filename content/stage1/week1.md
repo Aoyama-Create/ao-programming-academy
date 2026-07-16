@@ -236,6 +236,19 @@ console.log(a + b); // "53" になる（文字列の連結）
 
 **ヒント**: `for` で 1 から 15 まで回し、`if` / `else if` / `else` で「3 と 5 の公倍数」「3 の倍数」「5 の倍数」「それ以外」に分岐させます。
 
+下のエディタに直接書いて「▶ 実行」を押すと、ブラウザ内で実行して結果を確認できます（`node` のインストール前でも試せます）。まずは自分で書いてみて、うまく動かないときにヒントを見返しましょう。
+
+```exercise
+{
+  "id": "stage1-week1-fizzbuzz",
+  "kind": "node-js",
+  "title": "課題3: FizzBuzz（1〜15）",
+  "prompt": "1〜15 を順に表示。3の倍数は Fizz、5の倍数は Buzz、両方の倍数は FizzBuzz。それ以外は数字をそのまま表示。",
+  "starter": "for (let i = 1; i <= 15; i++) {\n  // ここに条件分岐を書く\n  console.log(i);\n}\n",
+  "expected": "1\n2\nFizz\n4\nBuzz\nFizz\n7\n8\nFizz\nBuzz\n11\nFizz\n13\n14\nFizzBuzz"
+}
+```
+
 ---
 
 ### 課題 4：九九の一段目

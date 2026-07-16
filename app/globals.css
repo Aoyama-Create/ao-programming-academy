@@ -238,3 +238,126 @@ body {
   white-space: pre-wrap;
   font-size: 0.75rem;
 }
+
+/* ---------- interactive exercise (ExerciseRunner) ---------- */
+
+.exercise-card {
+  margin: 1.75rem 0;
+  border: 1px solid #d0d7de;
+  border-radius: 10px;
+  background: #fbfcfd;
+  padding: 1.25rem;
+}
+
+.exercise-head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.exercise-badge {
+  flex: none;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #0a7d5a;
+  background: #d7f5ea;
+  border-radius: 999px;
+  padding: 0.15rem 0.6rem;
+}
+
+/* .markdown-body h4（element+class）に負けないよう、2 クラスで上書きする。
+   これをしないと見出しの margin: 2rem 0 1rem が効いて「演習」バッジとずれる。 */
+.exercise-head .exercise-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.exercise-prompt {
+  margin: 0 0 0.75rem;
+  font-size: 0.92rem;
+  color: #57606a;
+}
+
+.exercise-editor {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid #cfd7df;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #1f2328;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  tab-size: 2;
+}
+
+.exercise-editor:focus {
+  outline: 2px solid #2f9e77;
+  outline-offset: 1px;
+  border-color: #2f9e77;
+}
+
+.exercise-terminal {
+  margin-top: 0.9rem;
+  border-radius: 8px;
+  background: #0d1117;
+  color: #e6edf3;
+  padding: 0.85rem 1rem;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.83rem;
+  line-height: 1.55;
+  overflow-x: auto;
+  min-height: 3rem;
+}
+
+.exercise-terminal-prompt {
+  color: #7ee787;
+  margin-bottom: 0.35rem;
+  white-space: pre;
+}
+
+.exercise-terminal-line {
+  white-space: pre;
+}
+
+.exercise-terminal-dim {
+  color: #8b949e;
+}
+
+.exercise-terminal-error {
+  color: #ff7b72;
+  white-space: pre-wrap;
+  margin-top: 0.25rem;
+}
+
+.exercise-result {
+  margin-top: 0.85rem;
+  padding: 0.6rem 0.85rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.exercise-result.pass {
+  background: #d7f5ea;
+  color: #0a7d5a;
+  border: 1px solid #9fe6cd;
+}
+
+.exercise-result.fail {
+  background: #fff1e6;
+  color: #a1490b;
+  border: 1px solid #ffd3ad;
+}
+
+.exercise-format-error {
+  margin: 0.5rem 0 0;
+  font-size: 0.83rem;
+  color: #b42318;
+}
