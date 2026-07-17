@@ -367,3 +367,69 @@ body {
   font-size: 0.83rem;
   color: #b42318;
 }
+
+/* ---------- git-sim ---------- */
+
+.gitsim-status {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-bottom: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.gitsim-progress {
+  flex: none;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #3b5bdb;
+  background: #dbe4ff;
+  border-radius: 999px;
+  padding: 0.1rem 0.55rem;
+}
+
+.gitsim-instruction {
+  font-size: 0.9rem;
+  color: #364152;
+}
+
+.gitsim-prompt-mark {
+  color: #7ee787;
+  user-select: none;
+}
+
+.gitsim-inputline {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.35rem;
+}
+
+.gitsim-input {
+  flex: 1;
+  border: 0;
+  background: transparent;
+  color: #e6edf3;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.83rem;
+  line-height: 1.55;
+  padding: 0;
+  outline: none;
+}
+
+.gitsim-input::placeholder {
+  color: #6e7681;
+}
+
+.gitsim-hint {
+  margin: 0.5rem 0 0;
+  font-size: 0.85rem;
+  color: #57606a;
+}
+
+.gitsim-hint code {
+  background: #eff1f3;
+  border-radius: 6px;
+  padding: 0.1em 0.4em;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
